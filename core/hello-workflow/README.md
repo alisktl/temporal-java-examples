@@ -1,4 +1,4 @@
-# Temporal Workflow Example
+# Temporal Workflow Basic Example
 
 This repository demonstrates a basic example of using Temporal for workflow orchestration. The example includes a simple `HelloWorkflow` that greets a user by their name.
 
