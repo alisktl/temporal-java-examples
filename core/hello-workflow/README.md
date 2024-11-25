@@ -51,3 +51,35 @@ mvn exec:java \
 ```
 
 This command starts the worker that listens for tasks and executes the workflows.
+
+### 5. Start the Workflow (Starter)
+
+Finally, run the `Starter` class to start the `HelloWorkflow` and pass the user's name (in this case, "Alisher") as an argument. This will trigger the workflow and print the result:
+
+```bash
+mvn exec:java \
+    -Dexec.mainClass="org.temporal.example.Starter" \
+    -Dorg.slf4j.simpleLogger.defaultLogLevel=warn \
+    -Dexec.args="Alisher"
+```
+
+### Output
+
+After running the Starter command, you should see output like the following:
+
+```
+=====
+workflowId: hello-workflow-id
+Hello, Alisher!
+=====
+```
+
+### Troubleshooting
+
+- Logs and Debugging: If you encounter issues, consider changing the log level from warn to debug for more detailed logging:
+
+```bash
+-Dorg.slf4j.simpleLogger.defaultLogLevel=debug
+```
+
+- **Temporal UI**: If the Temporal UI is not loading on `http://localhost:8080`, ensure that the server started correctly and that the port is not being blocked by any firewall or other services.
