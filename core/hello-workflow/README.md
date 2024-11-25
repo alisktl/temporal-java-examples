@@ -76,7 +76,7 @@ Hello, Alisher!
 
 ### Troubleshooting
 
-- Logs and Debugging: If you encounter issues, consider changing the log level from warn to debug for more detailed logging:
+- Logs and Debugging: If you encounter issues, consider changing the log level from `warn` to `debug` for more detailed logging:
 
 ```bash
 -Dorg.slf4j.simpleLogger.defaultLogLevel=debug
