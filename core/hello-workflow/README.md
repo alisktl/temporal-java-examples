@@ -10,6 +10,12 @@ Before running the commands, ensure that the following are installed on your sys
 - **Maven**: Build automation tool used to compile and manage dependencies.
 - **Temporal Server**: Temporal's local development server for running workflows.
 
+## Project Overview
+### 1. HelloWorkflow
+This is the main workflow that defines and executes the greeting logic. It takes a user's name as input and directly generates a greeting message.
+
+The workflow implementation (`HelloWorkflowImpl`) defines the logic for the `hello` method. Since this example does not use activities, all the logic for generating the greeting is implemented directly in the workflow class.
+
 ## Setup and Running the Example
 
 Follow these steps to set up and run the Temporal workflow example.
