@@ -40,10 +40,8 @@ public class Starter {
         String workflowId = WorkflowStub.fromTyped(workflow).getExecution().getWorkflowId();
 
         // Step 7: Print the workflow ID and the result of the workflow execution.
-        System.out.println("=====");
         System.out.println("workflowId: " + workflowId);
         System.out.println(hello);
-        System.out.println("=====");
 
         // Exit the application after starting the workflow.
         System.exit(0);

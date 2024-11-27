@@ -68,10 +68,8 @@ mvn exec:java \
 After running the Starter command, you should see output like the following:
 
 ```
-=====
 workflowId: hello-workflow-id
 Hello, Alisher!
-=====
 ```
 
 ### Troubleshooting
