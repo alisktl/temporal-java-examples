@@ -5,10 +5,7 @@ import io.temporal.serviceclient.WorkflowServiceStubs;
 import io.temporal.worker.Worker;
 import io.temporal.worker.WorkerFactory;
 
-/**
- * This class sets up a Temporal worker to listen for workflow tasks and execute workflow implementations.
- */
-public class HelloWorkflowWorker {
+public class PurchaseFruitsWorker {
 
     public static void main(String[] args) {
         // Step 1: Create a WorkflowServiceStubs instance to communicate with the Temporal service.
@@ -27,14 +24,11 @@ public class HelloWorkflowWorker {
 
         // Step 5: Register the workflow implementation class with the worker.
         // The worker uses this class to execute workflow logic when tasks arrive in the task queue.
-        worker.registerWorkflowImplementationTypes(HelloWorkflowImpl.class);
+        worker.registerWorkflowImplementationTypes(PurchaseFruitsWorkflowImpl.class);
 
-        // Step 6: Register the activity implementation classes with the worker.
-        // Activities are individual units of work within a workflow, and this specifies
-        // which class contains the activity logic to be executed.
-        worker.registerActivitiesImplementations(new HelloActivitiesImpl());
+        worker.registerActivitiesImplementations(new OrderFruitsActivitiesImpl());
 
-        // Step 7: Start the WorkerFactory.
+        // Step 6: Start the WorkerFactory.
         // This begins polling for tasks and executing workflows.
         factory.start();
     }
