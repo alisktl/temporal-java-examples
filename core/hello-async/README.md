@@ -1,6 +1,6 @@
-# Exclusive Temporal Fruit Ordering Workflow
+# Execute Activities Asynchronously with Temporal Workflow
 
-This repository demonstrates an example of using Temporal for workflow orchestration. The example includes a simple workflow for purchasing fruits. The workflow orchestrates various activities, such as ordering different types of fruits using `OrderFruitsActivities`, and processes a shopping list provided by the user.
+This example demonstrates using Temporal for workflow orchestration with asynchronous methods. The example includes a simple workflow that concurrently generates greeting and farewell messages. By leveraging asynchronous activity execution, the workflow interacts with activities to compose personalized greetings and farewells based on a name provided by the user.
 
 ## Prerequisites
 
@@ -11,18 +11,18 @@ Before running the commands, ensure that the following are installed on your sys
 - **Temporal Server**: Temporal's local development server for running workflows.
 
 ## Project Overview
-### 1. PurchaseFruitsWorkflow
-This is the main workflow that orchestrates the execution of fruit ordering activities. It processes a shopping list and delegates tasks to the appropriate activities to order the fruits.
+### 1. GreetingWorkflow
+This is the main workflow that orchestrates the execution of greeting and farewell activities. It calls two activities: one to compose a greeting ("Hello") and one to compose a farewell ("Bye").
 
-### 2. OrderFruitsActivities
-This interface defines the activities that the `PurchaseFruitsWorkflow` relies on. Activities are the actual units of work that run outside the workflow's context. For this example, `OrderFruitsActivities` contains methods to order different fruits:
+### 2. GreetingActivities
+This interface defines the activities that the `GreetingWorkflow` relies on. Activities are the actual units of work that run outside the workflow's context. For this example, `GreetingActivities` contains the following method:
 
-- `orderApples(int amount)`: Orders a specified amount of apples.
-- `orderBananas(int amount)`: Orders a specified amount of bananas.
-- `orderCherries(int amount)`: Orders a specified amount of cherries.
-- `orderOranges(int amount)`: Orders a specified amount of oranges.
+- `composeGreeting(String greeting, String name)`: Composes a greeting message based on the provided greeting (e.g., "Hello", "Bye") and the name.
 
-The `OrderFruitsActivitiesImpl` class provides the implementation for these activities.
+The `GreetingActivitiesImpl` class provides the implementation for this activity.
+
+### 3. Workflow Implementation
+The `GreetingWorkflowImpl` class implements the `GreetingWorkflow` interface and orchestrates the greeting and farewell activities. It uses `Async.function` to run both activities concurrently and returns the combined results.
 
 ## Setup and Running the Example
 
@@ -56,11 +56,11 @@ mvn compile
 
 ### 4. Start the Workflow Worker
 
-Next, run the worker that listens for tasks on the task queue and processes the workflows. This will start the `PurchaseFruitsWorker` class:
+Next, run the worker that listens for tasks on the task queue and processes the workflows. This will start the `GreetingWorker` class:
 
 ```bash
 mvn exec:java \
-    -Dexec.mainClass="org.temporal.example.PurchaseFruitsWorker" \
+    -Dexec.mainClass="org.temporal.example.GreetingWorker" \
     -Dorg.slf4j.simpleLogger.defaultLogLevel=warn
 ```
 
@@ -68,12 +68,13 @@ This command starts the worker that listens for tasks and executes the workflows
 
 ### 5. Start the Workflow (Starter)
 
-Finally, run the `Starter` class to start the `PurchaseFruitsWorkflow` and pass a shopping list to the workflow. This will trigger the workflow and print the result:
+Finally, run the `Starter` class to start the `GreetingWorkflow` and pass a name to the workflow. This will trigger the workflow and print the result:
 
 ```bash
 mvn exec:java \
     -Dexec.mainClass="org.temporal.example.Starter" \
-    -Dorg.slf4j.simpleLogger.defaultLogLevel=warn
+    -Dorg.slf4j.simpleLogger.defaultLogLevel=warn \
+    -Dexec.args="Alisher"
 ```
 
 ### Output
@@ -81,7 +82,8 @@ mvn exec:java \
 After running the Starter command, you should see output like the following:
 
 ```
-Order results: Ordered 4 Oranges...Ordered 8 Apples...Ordered 1 Cherries...Ordered 5 Bananas...
+Hello Alisher!
+Bye Alisher!
 ```
 
 ### Troubleshooting
