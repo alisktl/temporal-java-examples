@@ -1,6 +1,10 @@
-# Exclusive Temporal Fruit Ordering Workflow
+# Greeting Workflow with Temporal Using External Microservice
 
-This repository demonstrates an example of using Temporal for workflow orchestration. The example includes a simple workflow for purchasing fruits. The workflow orchestrates various activities, such as ordering different types of fruits using `OrderFruitsActivities`, and processes a shopping list provided by the user.
+This project demonstrates using Temporal for orchestrating workflows that interact with an **external microservice**. The example includes a simple workflow, `GreetingWorkflow`, that generates personalized greetings and farewells in Spanish by making HTTP requests to an external microservice.
+
+The workflow coordinates activities defined in `GreetingActivities`, such as fetching a Spanish greeting and farewell for a given name. These activities use the `GreetingActivitiesImpl` class to call the external microservice via RESTful APIs to retrieve the appropriate messages.
+
+This project highlights how Temporal can be used to manage workflows that depend on external systems, ensuring reliability, fault tolerance, and scalability, even when interacting with potentially unreliable services. If the external microservice is unavailable or fails, Temporal ensures retries and maintains state until the workflow completes successfully.
 
 ## Prerequisites
 
