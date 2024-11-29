@@ -1,6 +1,6 @@
 # Greeting Workflow with Temporal Using External Microservice
 
-This project demonstrates using Temporal for orchestrating workflows that interact with an **external microservice**. The example includes a simple workflow, `GreetingWorkflow`, that generates personalized greetings and farewells in Spanish by making HTTP requests to an external microservice.
+This example demonstrates using Temporal for orchestrating workflows that interact with an **external microservice**. The example includes a simple workflow, `GreetingWorkflow`, that generates personalized greetings and farewells in Spanish by making HTTP requests to an external microservice.
 
 The workflow coordinates activities defined in `GreetingActivities`, such as fetching a Spanish greeting and farewell for a given name. These activities use the `GreetingActivitiesImpl` class to call the external microservice via RESTful APIs to retrieve the appropriate messages.
 
