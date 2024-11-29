@@ -1,6 +1,6 @@
 # Exclusive Temporal Fruit Ordering Workflow
 
-This repository demonstrates an example of using Temporal for workflow orchestration. The example includes a simple workflow for purchasing fruits. The workflow orchestrates various activities, such as ordering different types of fruits using `OrderFruitsActivities`, and processes a shopping list provided by the user.
+This example demonstrates using Temporal for workflow orchestration. The example includes a simple workflow for purchasing fruits. The workflow orchestrates various activities, such as ordering different types of fruits using `OrderFruitsActivities`, and processes a shopping list provided by the user.
 
 ## Prerequisites
 
