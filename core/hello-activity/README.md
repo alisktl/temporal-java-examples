@@ -1,6 +1,6 @@
 # Temporal Workflow Basic Example
 
-This repository demonstrates a basic example of using Temporal for workflow orchestration. The example includes a simple `HelloWorkflow` that greets a user by their name. Additionally, we've introduced `HelloActivities`, which is used by `HelloWorkflow` to execute the logic for generating greetings.
+This example demonstrates using Temporal for workflow orchestration. The example includes a simple `HelloWorkflow` that greets a user by their name. Additionally, we've introduced `HelloActivities`, which is used by `HelloWorkflow` to execute the logic for generating greetings.
 
 ## Prerequisites
 
