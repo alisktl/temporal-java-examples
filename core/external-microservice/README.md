@@ -15,18 +15,16 @@ Before running the commands, ensure that the following are installed on your sys
 - **Temporal Server**: Temporal's local development server for running workflows.
 
 ## Project Overview
-### 1. PurchaseFruitsWorkflow
-This is the main workflow that orchestrates the execution of fruit ordering activities. It processes a shopping list and delegates tasks to the appropriate activities to order the fruits.
+### 1. GreetingWorkflow
+This is the main workflow that orchestrates the execution of greeting and farewell activities. It processes a user's name and delegates tasks to the appropriate activities to fetch personalized greetings and farewells from an external microservice.
 
-### 2. OrderFruitsActivities
-This interface defines the activities that the `PurchaseFruitsWorkflow` relies on. Activities are the actual units of work that run outside the workflow's context. For this example, `OrderFruitsActivities` contains methods to order different fruits:
+### 2. GreetingActivities
+This interface defines the activities that the `GreetingWorkflow` relies on. Activities are the actual units of work that run outside the workflow's context. For this example, `GreetingActivities` contains methods to interact with the external microservice:
 
-- `orderApples(int amount)`: Orders a specified amount of apples.
-- `orderBananas(int amount)`: Orders a specified amount of bananas.
-- `orderCherries(int amount)`: Orders a specified amount of cherries.
-- `orderOranges(int amount)`: Orders a specified amount of oranges.
+- `greetInSpanish(String name)`: Fetches a personalized greeting in Spanish for the provided name.
+- `farewellInSpanish(String name)`: Fetches a personalized farewell in Spanish for the provided name.
 
-The `OrderFruitsActivitiesImpl` class provides the implementation for these activities.
+The `GreetingActivitiesImpl` class provides the implementation for these activities.
 
 ## Setup and Running the Example
 
@@ -60,11 +58,11 @@ mvn compile
 
 ### 4. Start the Workflow Worker
 
-Next, run the worker that listens for tasks on the task queue and processes the workflows. This will start the `PurchaseFruitsWorker` class:
+Next, run the worker that listens for tasks on the task queue and processes the workflows. This will start the `GreetingWorker` class:
 
 ```bash
 mvn exec:java \
-    -Dexec.mainClass="org.temporal.example.PurchaseFruitsWorker" \
+    -Dexec.mainClass="org.temporal.example.GreetingWorker" \
     -Dorg.slf4j.simpleLogger.defaultLogLevel=warn
 ```
 
@@ -72,12 +70,13 @@ This command starts the worker that listens for tasks and executes the workflows
 
 ### 5. Start the Workflow (Starter)
 
-Finally, run the `Starter` class to start the `PurchaseFruitsWorkflow` and pass a shopping list to the workflow. This will trigger the workflow and print the result:
+Finally, run the `Starter` class to start the `GreetingWorkflow` and pass a name to the workflow. This will trigger the workflow and print the result:
 
 ```bash
 mvn exec:java \
     -Dexec.mainClass="org.temporal.example.Starter" \
-    -Dorg.slf4j.simpleLogger.defaultLogLevel=warn
+    -Dorg.slf4j.simpleLogger.defaultLogLevel=warn \
+    -Dexec.args="Alisher"
 ```
 
 ### Output
@@ -85,7 +84,11 @@ mvn exec:java \
 After running the Starter command, you should see output like the following:
 
 ```
-Order results: Ordered 4 Oranges...Ordered 8 Apples...Ordered 1 Cherries...Ordered 5 Bananas...
+external-microservice-task-id
+
+¡Hola, Alisher!
+
+¡Adiós, Alisher!
 ```
 
 ### Troubleshooting
