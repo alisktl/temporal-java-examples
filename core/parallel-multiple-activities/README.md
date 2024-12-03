@@ -1,11 +1,10 @@
-# Execute Workflow Method Asynchronously and Use Await to Wait for a Condition
+# Execute multiple Activities in parallel, asynchronously, and wait for them using `Promise.allOf`
 
-This example demonstrates how to use Temporal for workflow orchestration with asynchronous methods and conditional logic. The workflow includes a simple example where a greeting message is generated based on a name provided by the user. Temporal’s `await` statement is used to pause the workflow execution until a signal condition is met.
+This example demonstrates how to use Temporal for workflow orchestration with asynchronous methods and conditional logic. The workflow includes a simple example where a greeting message is generated based on a name provided by the user. Temporal’s `Promise.allOf` is used to wait for multiple activities to complete in parallel, enhancing workflow efficiency.
 
 ## Key Features
-- **Asynchronous Workflow Execution**: Workflow methods are executed asynchronously, enabling concurrent execution and efficient resource utilization.
-- **Condition-Based Workflow Logic**: The workflow uses Temporal's await statement to wait until specific conditions are satisfied before proceeding.
-- **Signal-Based Interaction**: External signals can be sent to the workflow to dynamically influence its behavior.
+- **Parallel Activity Execution**: Multiple activities can run simultaneously, making the workflow more efficient.
+- **Waiting for All Activities to Complete**: Temporal’s `Promise.allOf` is used to wait for multiple promises (activities) to complete before proceeding.
 
 ## Prerequisites
 
@@ -16,17 +15,22 @@ Before running the commands, ensure that the following are installed on your sys
 - **Temporal Server**: Temporal's local development server for running workflows.
 
 ## Project Overview
-### 1. GreetingWorkflow
+### 1. MultiGreetingWorkflow
 This is the primary workflow interface, which defines the following methods:
 
-`getGreeting()`: The main entry point of the workflow that generates a greeting message.
-`waitForName(String name)`: A signal method to set the name dynamically while the workflow is running.
+- `getGreetings(List<String> names)`: The main entry point of the workflow that generates a greeting message for each name provided.
 
-### 2. GreetingWorkflowImpl
+### 2. MultiGreetingWorkflowImpl
 This is the implementation of the workflow logic. Key features include:
 
-Use of Temporal's `await` statement to pause workflow execution until the `name` is provided.
-Handling timeouts gracefully by throwing a Temporal-specific `ApplicationFailure` if the condition is not satisfied within a given time frame.
+- Use of Temporal’s `Promise.allOf` to wait for multiple activities to complete in parallel.
+- Asynchronous execution of greetings for multiple names, improving workflow throughput.
+
+### 3. GreetingActivities
+The activity interface defines the `composeGreeting(String greeting, String name)` method, which generates a greeting message for each name. This activity is called asynchronously for each name in the workflow.
+
+### 4. GreetingActivitiesImpl
+The implementation of the activity interface, which constructs a greeting message by concatenating a provided greeting and name.
 
 ## Setup and Running the Example
 
@@ -72,7 +76,7 @@ This command starts the worker that listens for tasks and executes the workflows
 
 ### 5. Start the Workflow (Starter)
 
-Finally, run the `Starter` class to start the `GreetingWorkflow` and pass a name to the workflow. This will trigger the workflow and print the result:
+Finally, run the `Starter` class to start the `MultiGreetingWorkflow` and pass a list of names to the workflow. This will trigger the workflow and print the result:
 
 ```bash
 mvn exec:java \
