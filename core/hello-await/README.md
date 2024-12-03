@@ -1,6 +1,11 @@
-# Execute Activities Asynchronously with Temporal Workflow
+# Execute Workflow Method Asynchronously and Use Await to Wait for a Condition
 
-This example demonstrates using Temporal for workflow orchestration with asynchronous methods. The example includes a simple workflow that concurrently generates greeting and farewell messages. By leveraging asynchronous activity execution, the workflow interacts with activities to compose personalized greetings and farewells based on a name provided by the user.
+This example demonstrates how to use Temporal for workflow orchestration with asynchronous methods and conditional logic. The workflow includes a simple example where a greeting message is generated based on a name provided by the user. Temporal’s `await` statement is used to pause the workflow execution until a signal condition is met.
+
+## Key Features
+- **Asynchronous Workflow Execution**: Workflow methods are executed asynchronously, enabling concurrent execution and efficient resource utilization.
+- **Condition-Based Workflow Logic**: The workflow uses Temporal's await statement to wait until specific conditions are satisfied before proceeding.
+- **Signal-Based Interaction**: External signals can be sent to the workflow to dynamically influence its behavior.
 
 ## Prerequisites
 
@@ -12,17 +17,16 @@ Before running the commands, ensure that the following are installed on your sys
 
 ## Project Overview
 ### 1. GreetingWorkflow
-This is the main workflow that orchestrates the execution of greeting and farewell activities. It calls two activities: one to compose a greeting ("Hello") and one to compose a farewell ("Bye").
+This is the primary workflow interface, which defines the following methods:
 
-### 2. GreetingActivities
-This interface defines the activities that the `GreetingWorkflow` relies on. Activities are the actual units of work that run outside the workflow's context. For this example, `GreetingActivities` contains the following method:
+`getGreeting()`: The main entry point of the workflow that generates a greeting message.
+`waitForName(String name)`: A signal method to set the name dynamically while the workflow is running.
 
-- `composeGreeting(String greeting, String name)`: Composes a greeting message based on the provided greeting (e.g., "Hello", "Bye") and the name.
+### 2. GreetingWorkflowImpl
+This is the implementation of the workflow logic. Key features include:
 
-The `GreetingActivitiesImpl` class provides the implementation for this activity.
-
-### 3. Workflow Implementation
-The `GreetingWorkflowImpl` class implements the `GreetingWorkflow` interface and orchestrates the greeting and farewell activities. It uses `Async.function` to run both activities concurrently and returns the combined results.
+Use of Temporal's `await` statement to pause workflow execution until the `name` is provided.
+Handling timeouts gracefully by throwing a Temporal-specific `ApplicationFailure` if the condition is not satisfied within a given time frame.
 
 ## Setup and Running the Example
 
@@ -83,7 +87,6 @@ After running the Starter command, you should see output like the following:
 
 ```
 Hello Alisher!
-Bye Alisher!
 ```
 
 ### Troubleshooting
