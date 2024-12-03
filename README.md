@@ -6,3 +6,4 @@
 - [Exclusive Choice](https://github.com/alisktl/temporal-java-examples/tree/main/core/exclusive-choice) - demonstrates how to execute workflows with changing input data.
 - [External Microservice](https://github.com/alisktl/temporal-java-examples/tree/main/core/external-microservice) - demonstrates how to execute workflows that interact with an external microservice.
 - [Hello Async](https://github.com/alisktl/temporal-java-examples/tree/main/core/hello-async) - demonstrates how to execute Activities asynchronously and wait for them using Promises.
+- [Hello Await](https://github.com/alisktl/temporal-java-examples/tree/main/core/hello-await) - demonstrates how to use Await statement to wait for a condition.
