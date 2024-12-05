@@ -8,3 +8,4 @@
 - [Hello Async](https://github.com/alisktl/temporal-java-examples/tree/main/core/hello-async) - demonstrates how to execute Activities asynchronously and wait for them using Promises.
 - [Hello Await](https://github.com/alisktl/temporal-java-examples/tree/main/core/hello-await) - demonstrates how to use Await statement to wait for a condition.
 - [Parallel Activities](https://github.com/alisktl/temporal-java-examples/tree/main/core/parallel-multiple-activities) - demonstrates how to execute multiple Activities in parallel, asynchronously, and wait for them using `Promise.allOf`.
+- [Async Activity Completion](https://github.com/alisktl/temporal-java-examples/tree/main/core/async-activity-completion) - demonstrates how to complete an Activity Execution asynchronously.
